@@ -1,7 +1,6 @@
 import {
   ClassSerializerInterceptor,
   Controller,
-  Get,
   UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -11,7 +10,7 @@ import { User } from './schemas/user.schema';
 import { UserEntity } from './schemas/user.entity';
 
 @Controller()
-export class AppController {
+export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)

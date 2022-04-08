@@ -29,27 +29,26 @@ export class UsersService {
       const createdUser = new this.userModel(createUserDto);
       createdUser.save(function (err) {
         if (err) console.log(err);
-        console.log('Save Successful');
       });
       return createdUser;
     }
     return user;
   }
 
-  async getNonce(public_addr: string): Promise<string> {
+  async getNonce(public_address: string): Promise<string> {
     const user: User = await this.createUser({
-      public_address: public_addr,
+      public_address: public_address,
     } as CreateUserDto);
     return user.nonce;
   }
 
-  async updateNonce(public_addr: string) {
-    const user = await this.findOne(public_addr);
+  async updateNonce(public_address: string) {
+    const user = await this.findOne(public_address);
     user.nonce = await UsersService.generateNonce();
     await user.save();
   }
 
-  async findOne(public_addr: string) {
-    return this.userModel.findOne({ public_address: public_addr });
+  async findOne(public_address: string) {
+    return this.userModel.findOne({ public_address: public_address });
   }
 }
